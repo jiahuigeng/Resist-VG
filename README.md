@@ -23,15 +23,19 @@ python generate.py --steps 20 --frames 49     # quick test
 
 Videos are written to `outputs/`.
 
-## On a Slurm cluster
+## On Arrhenius (GH200, aarch64)
+
+GPU nodes are ARM, so the env must be built on a GPU node. `scripts/arrhenius_setup.sh` installs
+Miniforge + the `resist-vg` env under the project directory and runs a smoke test:
 
 ```bash
-git clone https://github.com/<user>/Resist-VG.git && cd Resist-VG
-# create the conda env as above, then either:
+git clone https://github.com/jiahuigeng/Resist-VG.git && cd Resist-VG
+srun -A naiss2026-3-658-gpu -p gpu --gpus 1 -c 16 -t 02:00:00 --pty bash scripts/arrhenius_setup.sh
 
 # a) interactive session
-salloc --gpus=1 --time=01:00:00        # add --account/-C as your cluster needs
-export HF_HOME=$PWD/models/hf
+interactive -A naiss2026-3-658-gpu --partition gpu --gpus 1 -t 02:00:00
+source /nobackup/proj/disk/naiss2026-3-658/personal/jiage91/miniforge3/etc/profile.d/conda.sh
+conda activate /nobackup/proj/disk/naiss2026-3-658/personal/jiage91/envs/resist-vg
 python generate.py --prompt "..."
 
 # b) batch job (keeps running after you log out)

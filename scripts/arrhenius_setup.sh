@@ -1,7 +1,7 @@
 #!/bin/bash
 # Set up and smoke-test Resist-VG on an Arrhenius GH200 (aarch64) GPU node.
 # Run on a GPU node from the repo root, e.g.:
-#   srun -A naiss2026-3-658 -p gpu --gpus 1 -t 02:00:00 --pty bash scripts/arrhenius_setup.sh
+#   srun -A naiss2026-3-658-gpu -p gpu --gpus 1 -t 02:00:00 --pty bash scripts/arrhenius_setup.sh
 # Idempotent: reuses Miniforge and the env if they already exist.
 set -euo pipefail
 
