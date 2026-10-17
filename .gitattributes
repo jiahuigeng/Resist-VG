@@ -1,0 +1,2 @@
+# Always LF so scripts run on the Linux cluster
+* text=auto eol=lf

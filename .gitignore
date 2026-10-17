@@ -1,0 +1,14 @@
+# Generated videos and model weights stay out of git
+outputs/
+models/
+logs/
+*.mp4
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.ipynb_checkpoints/
+
+# Secrets
+.env
