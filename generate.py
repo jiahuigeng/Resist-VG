@@ -51,6 +51,8 @@ def main():
     t0 = time.time()
     vae = AutoencoderKLWan.from_pretrained(args.model, subfolder="vae", torch_dtype=torch.float32)
     pipe = WanPipeline.from_pretrained(args.model, vae=vae, torch_dtype=torch.bfloat16)
+    # Decoding 720p in one pass needs >32 GB VRAM; tiling keeps it small.
+    pipe.vae.enable_tiling()
     if args.offload:
         pipe.enable_model_cpu_offload()
     else:
